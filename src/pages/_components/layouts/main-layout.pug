@@ -1,0 +1,25 @@
+extends ../skeleton
+
+append variables
+    -
+        var layout = {
+            name: 'public'
+        }
+
+append styles
+    each fontURL in assets.layout.public.styles 
+        link(rel='stylesheet' href= fontURL)
+
+append scripts
+    each scriptURL in assets.layout.public.scripts 
+        script(src= scriptURL type='text/javascript' defer)
+
+append body 
+    header.header 
+        +header
+
+    main
+        block content
+
+    footer.footer 
+        +footer

@@ -1,0 +1,56 @@
+include includes
+
+block variables
+
+doctype html
+html(lang= meta.lang data-page= page.name data-layout= layout.name)
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no')
+        meta(name='robots' content='index, follow')
+        meta(property='og:type' content='website')
+
+        meta(property='og:locale' content= meta.locale)
+        meta(name='language' content= meta.lang)
+
+        meta(name='url' property='og:url' content= page.url || meta.url)
+        
+        base(href= meta.base)
+    
+        meta(name='msapplication-TileImage' content= page.image || meta.url + meta.image.url)
+        meta(property='og:image' content= page.image ? page.image.url : meta.url + meta.image.url)
+        meta(property='og:image:secure_url' content= page.image ? page.image.url : meta.url + meta.image.url)
+        meta(name='twitter:image' content= page.image ? page.image.url : meta.url + meta.image.url)
+
+        meta(property='og:image:width' content= page.image ? page.image.width : meta.image.width)
+        meta(property='og:image:height' content= page.image ? page.image.height : meta.image.height)
+
+        meta(name='twitter:card' content='summary_large_image')
+        meta(property='og:image:alt' content= page.title || meta.title + ' — ' + meta.description)
+
+        meta(property='og:title' content= page.title || meta.title)
+        meta(name='twitter:title' content!= page.title || meta.title)
+
+        meta(property='og:description' name='description' content= page.description || meta.description)
+        meta(name='twitter:description' content= page.description || meta.description)
+
+        meta(name='keywords' content= page.keywords || meta.keywords)
+
+        link(rel='icon' href= meta.favicon)
+
+        each fontURL in assets.skeleton.fonts 
+            link(rel='stylesheet' href= fontURL)
+
+        title= page.title || meta.title + ' — ' + meta.description
+
+        block styles
+            each styleURL in assets.skeleton.styles 
+                link(rel='stylesheet' href= styleURL)
+
+    body
+
+        block body
+
+        block scripts
+            each scriptURL in assets.skeleton.scripts 
+                script(src= scriptURL type='text/javascript' defer)
